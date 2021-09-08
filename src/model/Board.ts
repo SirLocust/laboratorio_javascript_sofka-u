@@ -1,10 +1,12 @@
+import { IElements } from './IElements';
+
 export class Board {
   private width: number;
   private height: number;
   private playing: boolean;
   private gameOver: boolean;
-  private bars: any[];
-  private ball: any;
+  private bars: IElements[];
+  private ball?: IElements;
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
@@ -12,9 +14,9 @@ export class Board {
     this.gameOver = false;
     this.bars = [];
   }
-  getElements(): any {
+  getElements(): IElements[] {
     let elements = this.bars;
-    elements.push(this.ball);
+    // elements.push(this.ball);
     return elements;
   }
 
