@@ -43,10 +43,47 @@ export class BoardView {
         break;
     }
   }
+  hit(a: IElements, b: IElements): boolean {
+    //Revisa si a colisiona con b
+    let hit = false;
+    if (a instanceof Ball) {
+      return false;
+    }
+    //Colisiones horizontales
+    if (b.posX + b.width >= a.posX && b.posX < a.posX + a.width) {
+      //Colisiona verticales
+      if (b.posY + b.height >= a.posY && b.posY < a.posY + a.height) hit = true;
+    }
+
+    //Colisión de a con b
+    if (b.posX <= a.posX && b.posX + b.width >= a.posX + a.width) {
+      if (b.posY <= a.posY && b.posY + b.height >= a.posY + a.height)
+        hit = true;
+    }
+
+    //Colision b con a
+    if (a.posX <= b.posX && a.posX + a.width >= b.posX + b.width) {
+      //Colisiona verticales
+      if (a.posY <= b.posY && a.posY + a.height >= b.posY + b.height)
+        hit = true;
+    }
+
+    return hit;
+  }
+
+  checkCollisions(): void {
+    for (const bar of this.board.$bars) {
+      if (this.hit(bar, this.board.getBall() as IElements)) {
+        this.board.getBall()?.collision(bar);
+      }
+    }
+  }
 
   play() {
     this.clean();
     this.drawAll();
+    this.checkCollisions();
+    this.board.getBall()?.move();
   }
 
   clean(): void {

@@ -8,7 +8,7 @@ export class Board {
   private playing: boolean;
   private gameOver: boolean;
   private bars: IElements[];
-  private ball?: IElements;
+  private ball?: Ball;
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
@@ -71,7 +71,10 @@ export class Board {
   public set $bars(value: any[]) {
     this.bars = value;
   }
-  setBar(ball: Ball): void {
+  setBall(ball: Ball): void {
     this.ball = ball;
+  }
+  getBall(): Ball | null {
+    return this.ball || null;
   }
 }
