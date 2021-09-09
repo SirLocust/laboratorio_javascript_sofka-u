@@ -29,7 +29,7 @@ export class Ball implements IElements {
     this.radius = radius;
     this.board = board;
     this.kindFigure = 'circle';
-    this.speedX = 3;
+    this.speedX = 2;
     this.speedY = 0;
     this.direction = 1;
     this.bounceAngle = 0;
@@ -45,6 +45,13 @@ export class Ball implements IElements {
 
   getKindFigure(): string {
     return this.kindFigure;
+  }
+  resetPosAndAngle(): void {
+    this.posX = 130;
+    this.posY = 50;
+    this.bounceAngle = 0;
+    this.speedX = 2;
+    this.speedY = 0;
   }
   collision(bar: Bar): any {
     let cal = bar.height / 2;

@@ -43,6 +43,21 @@ export class BoardView {
         break;
     }
   }
+
+  isBallOutWall(ball: Ball | null) {
+    if (!ball) {
+      return;
+    }
+
+    if (ball.posX > this.board.$width || ball.posX < 0) {
+      // this.board.tog glePlaying();
+      ball.resetPosAndAngle();
+    }
+    if (ball.posY > this.board.$height || ball.posY < 0) {
+      // this.board.tog glePlaying();
+      ball.resetPosAndAngle();
+    }
+  }
   hit(a: IElements, b: IElements): boolean {
     //Revisa si a colisiona con b
     let hit = false;
@@ -80,10 +95,13 @@ export class BoardView {
   }
 
   play() {
-    this.clean();
-    this.drawAll();
-    this.checkCollisions();
-    this.board.getBall()?.move();
+    if (this.board.getPlaying()) {
+      this.clean();
+      this.drawAll();
+      this.isBallOutWall(this.board.getBall());
+      this.checkCollisions();
+      this.board.getBall()?.move();
+    }
   }
 
   clean(): void {

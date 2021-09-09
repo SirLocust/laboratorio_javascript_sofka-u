@@ -39,6 +39,12 @@ export class Board {
   public get $height(): number {
     return this.height;
   }
+  public getPlaying(): boolean {
+    return this.playing;
+  }
+  public togglePlaying(): void {
+    this.playing = !this.playing;
+  }
 
   /**
    * Getter $bars
