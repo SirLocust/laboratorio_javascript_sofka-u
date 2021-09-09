@@ -1,3 +1,5 @@
+import { Ball } from './Ball';
+import { Bar } from './Bar';
 import { IElements } from './IElements';
 
 export class Board {
@@ -16,7 +18,9 @@ export class Board {
   }
   getElements(): IElements[] {
     let elements = this.bars;
-    // elements.push(this.ball);
+    if (this.ball) {
+      elements.push(this.ball);
+    }
     return elements;
   }
 
@@ -66,5 +70,8 @@ export class Board {
    */
   public set $bars(value: any[]) {
     this.bars = value;
+  }
+  setBar(ball: Ball): void {
+    this.ball = ball;
   }
 }

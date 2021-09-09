@@ -1,5 +1,7 @@
 import { IElements } from './../model/IElements';
 import { Board } from '../model/Board';
+import { Bar } from '../model/Bar';
+import { Ball } from '../model/Ball';
 
 export class BoardView {
   private canvas: HTMLCanvasElement;
@@ -24,9 +26,30 @@ export class BoardView {
   draw(ctx: CanvasRenderingContext2D, element: IElements): void {
     switch (element.getKindFigure()) {
       case 'rectangle':
-        console.log('hola');
-        ctx.fillRect(element.posX, element.posY, element.width, element.height);
+        const rectangle = element as Bar;
+        ctx.fillRect(
+          rectangle.posX,
+          rectangle.posY,
+          rectangle.width,
+          rectangle.height
+        );
+        break;
+      case 'circle':
+        const circle = element as Ball;
+        ctx.beginPath();
+        ctx.arc(circle.posX, circle.posY, circle.radius, 0, 7);
+        ctx.fill();
+        ctx.closePath();
         break;
     }
+  }
+
+  play() {
+    this.clean();
+    this.drawAll();
+  }
+
+  clean(): void {
+    this.contextCanvas?.clearRect(0, 0, this.board.$width, this.board.$height);
   }
 }

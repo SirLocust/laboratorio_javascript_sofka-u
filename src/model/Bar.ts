@@ -30,9 +30,9 @@ export class Bar implements IElements {
     return this.kindFigure;
   }
   moveDown(): void {
-    this.posX += this.speed;
+    this.posY += this.speed;
   }
   moveUp(): void {
-    this.posX -= this.speed;
+    this.posY -= this.speed;
   }
 }
